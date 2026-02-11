@@ -2,10 +2,10 @@
 nixPkgs = ["nodejs_20", "python3"]
 
 [phases.install]
-cmds = ["npm ci --legacy-peer-deps"]
+cmds = ["npm ci --legacy-peer-deps --omit=dev"]
 
 [phases.build]
-cmds = ["npm run build || echo 'Build failed, will use dev mode'"]
+cmds = ["npm run build"]
 
 [start]
-cmd = "if [ -f dist/index.cjs ]; then npm run start; else npm run dev; fi"
+cmd = "NODE_ENV=production node dist/index.cjs"
